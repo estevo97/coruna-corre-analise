@@ -426,4 +426,4 @@ O proxecto xestionarase seguindo boas prácticas de desenvolvemento con GitHub:
 
 ## 13. Licenza
 
-Consultar a licenza do proxecto segundo corresponda.
+Consultar a licenza do proxecto segundo corresponda.f
