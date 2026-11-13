@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.env
+.ipynb_checkpoints/
+.DS_Store
+*.log
+
+# Data
+/data/raw/*
+/data/interim/*
+/data/clean/*
+!/data/raw/.gitkeep
+!/data/interim/.gitkeep
+!/data/clean/.gitkeep
+
+# Output generated
+/output/*
+!/output/.gitkeep
