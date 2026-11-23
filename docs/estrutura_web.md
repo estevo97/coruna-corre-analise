@@ -54,7 +54,15 @@ Dentro de cada carreira aparecen as categorías dispoñibles para consultar as c
 
 Ao seleccionar a categoría «Absoluta» accédese á táboa cos resultados dos participantes desa carreira e categoría.
 
+Esta navegación permite establecer a seguinte estrutura xerárquica para a extracción dos datos:
+
+**Edición → Carreira → Categoría → Resultados.**
+
 ## 4. Exclusións
+
+O proceso automatizado deberá identificar a categoría Absoluta e as súas subcategorías adultas, evitando extraer as clasificacións correspondentes ás categorías infantís e xuvenís.
+
+Para iso, a identificación das categorías deberá realizarse mediante a súa denominación ou texto, evitando depender da posición que ocupen na páxina ou dun número fixo de ligazóns.
 
 ## 5. Última carreira
 
