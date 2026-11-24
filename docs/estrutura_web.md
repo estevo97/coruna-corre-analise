@@ -50,20 +50,87 @@ Nesta vista aparecen as sete carreiras do circuíto. Ao seleccionar unha delas a
 
 ## 3. Categorías
 
-Dentro de cada carreira aparecen as categorías dispoñibles para consultar as clasificacións.
+Dentro de cada carreira aparece un selector que permite escoller entre as diferentes categorías dispoñibles para consultar as clasificacións.
 
-Ao seleccionar a categoría «Absoluta» accédese á táboa cos resultados dos participantes desa carreira e categoría.
+Para este proxecto interesa a categoría «ABSOLUTA (2008 e anteriores)», que agrupa os participantes adultos.
 
-Esta navegación permite establecer a seguinte estrutura xerárquica para a extracción dos datos:
-
-**Edición → Carreira → Categoría → Resultados.**
+Ao seleccionala accédese a unha única táboa clasificatoria que permite consultar os resultados filtrados por diferentes subcategorías de idade (Máster 1 Masculino, Máster 2 Masculino, Máster 2 Feminino, etc.).
 
 ## 4. Exclusións
 
-O proceso automatizado deberá identificar a categoría Absoluta e as súas subcategorías adultas, evitando extraer as clasificacións correspondentes ás categorías infantís e xuvenís.
+Para o scraping extraerase a táboa completa da categoría Absoluta, sen aplicar filtros adicionais, excluíndo así as restantes categorías infantís e xuvenís.
 
-Para iso, a identificación das categorías deberá realizarse mediante a súa denominación ou texto, evitando depender da posición que ocupen na páxina ou dun número fixo de ligazóns.
+A estrutura de extracción será:
+
+Edición → Carreira → Categoría → Resultados.
 
 ## 5. Última carreira
 
-## 6. Elementos indispensables para scrapping
+Para identificar a última carreira da edición, consultarase a sección «Eventos», onde aparecen as probas programadas para o circuíto.
+
+Seleccionarase a última carreira da lista e accederase á súa ficha individual, na que se pode consultar a data de celebración.
+
+## 5. Última carreira
+
+Para identificar a última carreira da edición, accederase á sección «Eventos» e percorreranse as ligazóns de todas as carreiras dispoñibles.
+
+Accederase á ficha individual de cada evento para obter a súa data de celebración. Unha vez recollidas todas as datas, compararanse para identificar a carreira máis recente.
+
+Para comprobar se xa se celebrou, verificarase que a súa data sexa anterior ou igual á data actual e que os resultados da categoría Absoluta estean publicados en «Resultados → Edición actual → Por evento».
+
+## 6. Elementos indispensables para scraping
+
+Para implementar o scraper será necesario identificar os elementos que permiten navegar polas diferentes seccións da web e localizar os resultados das carreiras.
+
+Os elementos principais que se deberán identificar son:
+
+- **Eventos:** ligazóns ás carreiras e datas de celebración das súas fichas individuais.
+- **Resultados:** ligazóns ás edicións dispoñibles.
+- **Edición:** acceso á modalidade «Por evento».
+- **Por evento:** ligazóns ás carreiras que forman parte da edición.
+- **Carreira:** selector de categorías e identificación da opción «ABSOLUTA (2008 e anteriores)».
+- **Resultados:** táboa clasificatoria correspondente á categoría Absoluta e, se existen, controis para navegar entre as distintas páxinas de resultados.
+
+A categoría Absoluta agrupa os participantes adultos nunha única táboa clasificatoria. Dentro dela existen subcategorías por idade e sexo, que funcionan como filtros da mesma táboa. Polo tanto, para este proxecto extraerase a clasificación completa da categoría Absoluta, sen aplicar filtros adicionais, excluíndo así as categorías infantís e xuvenís.
+
+Da táboa clasificatoria identificáronse os seguintes campos:
+
+- Posto xeral.
+- Dorsal.
+- Nome e apelidos.
+- Posto por sexo.
+- Posto por categoría.
+- Tempo.
+
+Será necesario identificar as ligazóns, os elementos HTML correspondentes e os seus atributos (por exemplo, `href`, `id` ou `class`) para facilitar a navegación automatizada e a posterior extracción dos datos.
+
+### 6.1. Legalidade e protección de datos
+
+**Robots.txt**
+
+A web `corunacorre.com` non dispón dun ficheiro `robots.txt`. Ao acceder a `https://corunacorre.com/robots.txt`, o servidor devolve un erro HTTP 404 (Not Found).
+
+Isto significa que non hai instrucións específicas para robots automatizados publicadas neste ficheiro. Porén, a súa ausencia non implica que a extracción automatizada estea automaticamente autorizada nin exime de respectar as condicións de uso da web e a normativa de protección de datos.
+
+**Aviso legal e protección de datos**
+
+O aviso legal de corunacorre.com identifica a Multisports Galicia, S.L. como titular da web. Nel establécese que o uso da información persoal obtida da plataforma está limitado á xestión deportiva do evento correspondente e que non se permite a cesión destes datos para outras finalidades non contempladas na política de protección de datos.
+
+A política de privacidade identifica a Multisports Galicia, S.L.U. como responsable do tratamento dos datos na plataforma. Entre as finalidades indicadas figura a publicación dos resultados das actividades deportivas. Tamén contempla a comunicación dos datos ás entidades organizadoras dos eventos.
+
+Pola súa parte, o artigo 13 do regulamento do Circuíto Coruña Corre identifica o Concello da Coruña como responsable do tratamento dos datos necesarios para a inscrición, o rexistro e o desenvolvemento das actividades deportivas. Tamén contempla a publicación de nomes e imaxes das persoas participantes co seu consentimento.
+
+**Datos persoais e medidas de protección**
+
+Os resultados deportivos poden conter datos persoais como nome e apelidos, dorsal, sexo, categoría, posición e tempo. Estes datos utilizaranse exclusivamente para a análise deportiva prevista neste proxecto.
+
+Para protexer a privacidade dos participantes:
+
+- Non se mostrarán nomes nin apelidos nas saídas dos notebooks.
+- Eliminaranse as columnas que conteñan nomes antes de visualizar ou imprimir os datos.
+- Non se publicarán nin compartirán datos persoais innecesarios.
+- Limitarase o acceso aos ficheiros descargados e evitarase incluír datos persoais no repositorio.
+
+**Acceso responsable á web**
+    
+As descargas realizaranse identificando o cliente mediante un `User-Agent` propio e respectando unha pausa mínima dun segundo entre peticións, evitando solicitudes innecesarias ao servidor.
